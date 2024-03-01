@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <title>8uNny29 - JSACCSYS</title>
+</head>
+<body>
+    <div class="topnav">
+        <div class="leftnav">
+            <a class="active" href="/">Home</a>
+            <a href="#news">News</a>
+            <a href="#contact">Contact</a>
+            <a href="#about">About</a>
+        </div>
+        <div class="rightnav">
+            <form method="post" action="/logout">
+                <button>LOGOUT</button>
+            </form>
+            <% if (session.username) { %>
+                <a class="active"><%= session.username %></a>
+            <% } %>
+        </div>
+    </div> 
+</body>
+</html>

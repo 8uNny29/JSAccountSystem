@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/routes/css/styles.css">
+  <title>HOMEPAGE</title>
+</head>
+<body>
+  <div class="topnav">
+    <div class="leftnav">
+        <a class="active" href="/">Home</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+    </div>
+    <div class="rightnav">
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    </div>
+  </div>
+  <div class="table-data">
+    <h2>Display Data using Node.js & MySQL</h2>
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Role</th>
+      </tr>
+      <% if (userData.length !== 0) { %>
+        <% userData.forEach(function(data, index) { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= data.username %></td>
+            <td><%= data.email %></td>
+            <td><%= data.password %></td>
+            <td><%= data.firstname %></td>
+            <td><%= data.lastname %></td>
+            <td><%= data.role %></td>
+          </tr>
+        <% }); %>
+      <% } else { %>
+        <tr>
+          <td colspan="7">No Data Found</td>
+        </tr>
+      <% } %>
+    </table>
+  </div>
+</body>
+</html>
