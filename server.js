@@ -39,28 +39,28 @@ app.get('/register', (req, res, next) => {
     if (req.session.loggedin) {
         res.redirect('/dashboard');
     } else {
-        res.sendFile(__dirname + '/routes/html/register.html');
+        res.render('register');
     }
 });
 
 app.get('/registerFailed', (req, res, next) => {
-    res.sendFile(__dirname + '/routes/html/registerFailed.html');
+    res.render('registerFailed');
 });
 
 app.get('/404', (req, res, next) => {
-    res.sendFile(__dirname + '/routes/html/error404.html');
+    res.render('error404');
 });
 
 app.get('/login', (req, res, next) => {
     if (req.session.loggedin) {
         res.redirect('/dashboard');
     } else {
-        res.sendFile(__dirname + '/routes/html/login.html');
+        res.render('login');
     }
 });
 
 app.get('/loginFailed', (req, res, next) => {
-    res.sendFile(__dirname + '/routes/html/loginFailed.html');
+    res.render('loginFailed');
 });
 
 app.get('/dashboard', (req, res, next) => {
