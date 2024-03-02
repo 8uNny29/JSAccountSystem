@@ -10,15 +10,27 @@
     <div class="topnav">
         <div class="leftnav">
             <a class="active" href="/">Home</a>
-            <a href="/user-list">User List</a>
+            <a href="#news">What's New?</a>
             <a href="#contact">Contact</a>
-            <a href="#about">About</a>
+            <a href="#about">Tentang</a>
         </div>
         <div class="rightnav">
-            <form method="post" action="/logout">
-                <button>LOGOUT</button>
-            </form>
-            <a class="active">!Admin</a>
+            <div class="dropdown">
+                <% if (session.username) { %>
+                    <div class="dropdown">
+                        <a class="active dropbtn"><%= session.username %>
+                            <i class="fa fa-caret-down"></i>
+                        </a><br><br>
+                        <div class="dropdown-content">
+                            <form method="post" action="/logout">
+                                <button>Logout</button>
+                            </form>
+                            <a href="#">Setelan</a>
+                            <a href="#">Support</a>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
         </div>
         <div class="table-data">
             <% if (session.username) { %>

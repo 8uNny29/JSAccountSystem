@@ -8,25 +8,27 @@
 </head>
 <body>
       <div class="topnav">
-            <a class="active" href="/">Home</a>
-            <a href="#news">News</a>
-            <a href="#contact">Contact</a>
-            <a href="#about">About</a>
-            <div class="logregnav">
-                <a href="/login">Login</a>
-                <a href="/register">Register</a>
+            <div class="leftnav">
+                  <a class="active" href="/">Home</a>
+                  <a href="#news">What's New?</a>
+                  <a href="#contact">Contact</a>
+                  <a href="#about">Tentang</a>
             </div>
-      </div> 
+            <div class="rightnav">
+                <a href="/login">Login</a>
+                <a class="active" href="/register">Register</a>
+            </div>
+      </div>
       <div class="login-box">
             <h2>Register</h2>
             <h2 style="color: red;">ada yang salah, coba buat ulang dengan username lain</h2>
             <form method="post" action="/register">
             <div class="user-box">
-                  <input type="text" name="firstusername" required="">
+                  <input type="text" name="firstname" required="">
                   <label>Firstname</label>
             </div>
             <div class="user-box">
-                  <input type="text" name="lastusername" required="">
+                  <input type="text" name="lastname" required="">
                   <label>Lastname</label>
             </div>
             <div class="user-box">

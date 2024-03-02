@@ -11,21 +11,20 @@ router.get('/user-list', (req, res) => {
     db.query(sqlGetRole, [roleUsername], (err, results) => {
         if (err) throw err;
 
-        if (req.session.loggedin) {
+        db.query(sql, (err, data) => {
+          if (err) throw err;
+
+          if (req.session.loggedin) {
             if (req.session.admin) {
-              res.render('user-list');
+              res.render('user-list', { session: req.session, userData: data });
             } else {
               res.redirect('/404');
             }
         } else {
             res.redirect('/login');
         }
+        });
     });
-
-  db.query(sql, (err, data) => {
-    if (err) throw err;
-    
-  });
 });
 
 module.exports = router;
