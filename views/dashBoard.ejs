@@ -4,35 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <script src="https://kit.fontawesome.com/b34f8ba4d0.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>8uNny29 - JSACCSYS</title>
 </head>
 <body>
-    <div class="topnav">
-        <div class="leftnav">
-            <a class="active" href="/">Home</a>
-            <a href="#news">News</a>
-            <a href="#contact">Contact</a>
-            <a href="#about">About</a>
+    <!-- The sidebar -->
+    <div class="sidebar">
+        <% if (session.username) { %>
+            <a class="dropdown-btn"><i class='fas'> &#xf406;</i> <%= session.username %><i class="fa fa-caret-down"></i></a>
+        <% } %>
+        <div class="dropdown-container">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+            <form method="post" action="/logout">
+                <button class="logoutbtn">Logout</button>
+            </form>
         </div>
-        <div class="rightnav">
-            <div class="dropdown">
-                <% if (session.username) { %>
-                    <div class="dropdown">
-                        <a class="active dropbtn"><%= session.username %>
-                            <i class="fa fa-caret-down"></i>
-                        </a><br><br>
-                        <div class="dropdown-content">
-                            <form method="post" action="/logout">
-                                <button>Logout</button>
-                            </form>
-                            <a href="#">Setelan</a>
-                            <a href="#">Support</a>
-                        </div>
-                    </div>
-                <% } %>
-            </div>
-        </div>
-    </div> 
+        <a class="active" href="/">Beranda</a>
+        <a href="#news">Berita</a>
+        <a href="#contact">Hubungi kami</a>
+        <a href="#about">Tentang</a>
+    </div>
+    
+    <!-- Page content -->
+    <div class="content">
+        <h1></h1>
+    </div>
+
+    <script>
+        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+        
+        for (i = 0; i < dropdown.length; i++) {
+          dropdown[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === "block") {
+              dropdownContent.style.display = "none";
+            } else {
+              dropdownContent.style.display = "block";
+            }
+          });
+        }
+    </script>
 </body>
 </html>

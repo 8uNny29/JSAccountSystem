@@ -1,12 +1,10 @@
 // Modules
 const express = require('express');
 const bodyParser = require('body-parser');
-const db = require('./routes/config/dbconfig');
+const db = require('./config/dbconfig');
 const coookieParser = require('cookie-parser');
 const sessions = require('express-session');
 const path = require('path')
-const users = require('./routes/routers/users');
-const timeDate = require('./routes/routers/timeDate');
 
 // Middleware
 const app = express();
@@ -14,8 +12,7 @@ const port = 3000;
 app.use(coookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '/')));
-app.use(express.static(path.join(__dirname, 'routes')));
+app.use(express.static(path.join(__dirname, 'views')));
 app.set('view engine', 'ejs');
 app.set('trust proxy', 1) // trust first proxy
 app.use(sessions({
@@ -24,14 +21,12 @@ app.use(sessions({
     saveUninitialized: true,
     cookie: { maxAge: 1000 * 60 * 60 * 24 }
 }));
-app.use('/', users);
-app.use('/', timeDate);
 
 app.get('/', (req, res, next) => {
     if (req.session.loggedin) {
         res.redirect('/dashboard');
     } else {
-        res.sendFile(__dirname + 'index.html');
+        res.render('index', { session: req.session });
     }
 });
 
@@ -65,20 +60,30 @@ app.get('/loginFailed', (req, res, next) => {
 
 app.get('/dashboard', (req, res, next) => {
     const sqlGetRole = 'SELECT * FROM accounts WHERE username = ?';
+    const sql = 'SELECT * FROM accounts';
     const roleUsername = req.session.username;
+    const counter = 'SELECT COUNT(*) FROM accounts';
 
     db.query(sqlGetRole, [roleUsername], (err, results) => {
         if (err) throw err;
 
-        if (req.session.loggedin) {
-            if (req.session.admin) {
-                res.render('adminDashBoard', { session: req.session });
-            } else {
-                res.render('dashBoard', { session: req.session });
-            }
-        } else {
-            res.redirect('/login');
-        }
+        db.query(counter, (err, results) => {
+            if (err) throw err;
+
+            db.query(sql, (err, data) => {
+                if (err) throw err;
+            
+                if (req.session.loggedin) {
+                    if (req.session.admin) {
+                        res.render('adminDashBoard', { session: req.session, userData: data, count: results[0]['COUNT(*)'] });
+                    } else {
+                        res.render('dashBoard', { session: req.session });
+                    }
+                } else {
+                    res.redirect('/login');
+                }
+            });
+        });
     });
 });
 
@@ -137,5 +142,3 @@ app.post('/logout', (req, res, next) => {
 app.listen(port, () => {
     console.log('Program berhasil dijalankan (http://localhost:3000/)');
 });
-
-module.exports = {app, sessions, req: app.request, res: app.response};

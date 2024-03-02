@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <title>8uNny29 - JSACCSYS</title>
+    </head>
+<body>
+    <!-- The sidebar -->
+    <div class="sidebar">
+        <% if (session.username) { %>
+            <a class="dropdown-btn"><i class='fas'> &#xf406;</i> <%= session.username %><i class="fa fa-caret-down"></i></a>
+            <div class="dropdown-container">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+                <form method="post" action="/logout">
+                    <button class="logoutbtn">Logout</button>
+                </form>
+            </div>
+            <a class="active" href="/">Beranda</a>
+            <a href="#news">Berita</a>
+            <a href="#contact">Hubungi kami</a>
+            <a href="#about">Tentang</a>
+        <% } else { %>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+            <a class="active" href="/">Beranda</a>
+            <a href="#news">Berita</a>
+            <a href="#contact">Hubungi kami</a>
+            <a href="#about">Tentang</a>
+        <% } %>
+    </div>
+    
+    <!-- Page content -->
+    <div class="content">
+        <h1></h1>
+    </div>
+</body>
+</html>
