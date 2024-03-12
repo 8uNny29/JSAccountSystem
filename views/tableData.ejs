@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <script src="https://kit.fontawesome.com/b34f8ba4d0.js" crossorigin="anonymous"></script>
+    <title>8uNny29 - JSACCSYS</title>
+  
+  </head>
+  
+  <body>
+  
+    <nav>
+      <div class="wrapper">
+        <div class="logo"><a href="#">8uNny29 Corp.</a></div>
+          <input type="radio" name="slider" id="menu-btn">
+          <input type="radio" name="slider" id="close-btn">
+          <ul class="nav-links">
+            <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+            <li><a href="/">Beranda</a></li>
+            <li><a href="#">Tentang</a></li>
+            <% if (session.username) { %>
+              <li>
+                <a href="#" class="desktop-item"><i class='fas'> &#xf406;</i> <%= session.username %></a>
+                <input type="checkbox" id="showDrop">
+                <label for="showDrop" class="mobile-item"><%= session.username %></label>
+                <ul class="drop-menu">
+                  <li><a href="#">Donasi</a></li>
+                  <li><a href="#">Setelan</a></li>
+                  <li><a href="/logout">Logout</a></li>
+                </ul>
+              </li>
+            <% } %>
+          </ul>
+          <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+        </div>
+      </div>
+    </nav>
+    
+    <!-- Page content -->
+    <div class="body-text">
+
+      <div class="table-box">
+        <div class="item">
+            <h3>User Data</h3>
+          <div class="table-data">
+            <table border="1">
+              <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Role</th>
+                <th></th>
+              </tr>
+              <% if (userData.length !== 0) { %>
+                <% userData.forEach(function(data, index) { %>
+                  <tr>
+                    <td><%= data.id %></td>
+                    <td><%= data.username %></td>
+                    <td><%= data.email %></td>
+                    <td><%= data.password %></td>
+                    <td><%= data.firstname %></td>
+                    <td><%= data.lastname %></td>
+                    <td><%= data.role %></td>
+                    <td><a href="/user-data/<%= data.id %>">Edit</a></td>
+                  </tr>
+                <% }); %>
+              <% } else { %>
+                <tr>
+                  <td colspan="7">No Data Found</td>
+                </tr>
+              <% } %>
+            </table>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</body>
+</html>

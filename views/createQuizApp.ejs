@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <script src="https://kit.fontawesome.com/b34f8ba4d0.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>8uNny29 - JSACCSYS</title>
+</head>
+<body>
+    <!-- The sidebar -->
+    <div class="sidebar">
+      
+      <% if (session.username) { %>
+        <a class="dropdown-btn"><i class='fas'> &#xf406;</i> <%= session.username %><i class="fa fa-caret-down"></i></a>
+      <% } %>
+
+      <div class="dropdown-container">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+        <form method="post" action="/logout">
+          <button class="logoutbtn">Logout</button>
+        </form>
+      </div>
+
+      <a class="active" href="/">Beranda</a>
+      <a href="/user-data">User Data</a>
+      <a href="/create-quiz">Buat Quiz</a>
+      <a href="#contact">Hubungi kami</a>
+      <a href="#about">Tentang</a>
+    </div>
+    
+    <!-- Page content -->
+    <div class="content">
+
+        <div class="edit-box">
+            <div class="item">
+              <form action="/create-quiz" method="post">
+                <h3>Create Quiz</h3>
+                <label for="quest">Question</label>
+                <input type="text" name="quest" id="quest" value="">
+                <label for="opsi1">Option 1</label>
+                <input type="text" name="opsi1" id="opsi1" value="">
+                <label for="opsi2">Option 2</label>
+                <input type="text" name="opsi2" id="opsi2" value="">
+                <label for="opsi3">Option 3</label>
+                <input type="text" name="opsi3" id="opsi3" value="">
+                <label for="opsi4">Option 4</label>
+                <input type="text" name="opsi4" id="opsi4" value="">
+                <label for="answer">Answer</label>
+                <input type="text" name="answer" id="answer" value="">
+                <button type="submit">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  Update
+                </button>
+              </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+      var dropdown = document.getElementsByClassName("dropdown-btn");
+      var i;
+        
+      for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var dropdownContent = this.nextElementSibling;
+          if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+          } else {
+            dropdownContent.style.display = "block";
+          }
+        });
+      }
+    </script>
+</body>
+</html>

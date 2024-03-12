@@ -6,9 +6,15 @@ const coookieParser = require('cookie-parser');
 const sessions = require('express-session');
 const path = require('path')
 
+//Get Routers
+const dashBoard = require('./routers/dashBoard');
+const tableData = require('./routers/tableData');
+const tableEdit = require('./routers/tableEdit');
+const quizApp = require('./routers/quizFunction');
+
 // Middleware
 const app = express();
-const port = 3000;
+const port = 2902;
 app.use(coookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -21,6 +27,14 @@ app.use(sessions({
     saveUninitialized: true,
     cookie: { maxAge: 1000 * 60 * 60 * 24 }
 }));
+
+app.use('/user-data/', express.static(__dirname + '/views'));
+
+//Routers
+app.use('/', dashBoard);
+app.use('/', tableData);
+app.use('/', tableEdit);
+app.use('/', quizApp);
 
 app.get('/', (req, res, next) => {
     if (req.session.loggedin) {
@@ -58,35 +72,6 @@ app.get('/loginFailed', (req, res, next) => {
     res.render('loginFailed');
 });
 
-app.get('/dashboard', (req, res, next) => {
-    const sqlGetRole = 'SELECT * FROM accounts WHERE username = ?';
-    const sql = 'SELECT * FROM accounts';
-    const roleUsername = req.session.username;
-    const counter = 'SELECT COUNT(*) FROM accounts';
-
-    db.query(sqlGetRole, [roleUsername], (err, results) => {
-        if (err) throw err;
-
-        db.query(counter, (err, results) => {
-            if (err) throw err;
-
-            db.query(sql, (err, data) => {
-                if (err) throw err;
-            
-                if (req.session.loggedin) {
-                    if (req.session.admin) {
-                        res.render('adminDashBoard', { session: req.session, userData: data, count: results[0]['COUNT(*)'] });
-                    } else {
-                        res.render('dashBoard', { session: req.session });
-                    }
-                } else {
-                    res.redirect('/login');
-                }
-            });
-        });
-    });
-});
-
 app.post('/register', (req, res, next) => {
     const { firstname, lastname, email, username, password } = req.body;
     const role = 'member';
@@ -118,6 +103,7 @@ app.post('/login', (req, res, next) => {
             req.session.loggedin = true;
             req.session.username = username;
             req.session.admin = result[0].role === 'admin';
+            req.session.role = result[0].role;
             res.redirect('/dashboard');
         } else {
             res.redirect('/loginFailed');
@@ -125,7 +111,7 @@ app.post('/login', (req, res, next) => {
     });
 });
 
-app.post('/logout', (req, res, next) => {
+app.get('/logout', (req, res, next) => {
     if (req.session.loggedin) {
       req.session.user = null;
       req.session.save(function (err) {
@@ -140,5 +126,5 @@ app.post('/logout', (req, res, next) => {
 });
 
 app.listen(port, () => {
-    console.log('Program berhasil dijalankan (http://localhost:3000/)');
+    console.log('Program berhasil dijalankan (http://localhost:2902/)');
 });
