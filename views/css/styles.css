@@ -288,17 +288,15 @@ nav input{
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 0px;
   width: 100%;
 }
 
 .table-box .item {
   background: #fff;
   width: 100%;
-  padding: 12% 0px;
-  margin: 10px;
+  padding: 170px 0px;
   text-align: center;
-  background: #ffffffcc;
+  background: rgba(255, 255, 255, 0.555);
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0,0,0,.6);
   border-radius: 10px;
@@ -321,17 +319,13 @@ nav input{
 .edit-box .item {
   background: #fff;
   width: 450px;
-  padding: 35px 40px;
+  padding: 25px 40px;
   margin: 10px;
   text-align: center;
   background: rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0,0,0,.6);
   border-radius: 10px;
-}
-
-.edit-box h3 {
-  color:  white;
 }
 
 .edit-box label {
@@ -349,7 +343,7 @@ nav input{
   padding: 0 0;
   font-size: 16px;
   color: #fff;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   border: none;
   border-bottom: 1px solid #fff;
   outline: none;
@@ -367,7 +361,9 @@ nav input{
   overflow: hidden;
   transition: .5s;
   margin-top: 40px;
-  letter-spacing: 4px
+  letter-spacing: 4px;
+  background-color: transparent;
+  border: none;
 }
 
 .edit-box button:hover {

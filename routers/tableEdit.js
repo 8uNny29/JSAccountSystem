@@ -25,7 +25,7 @@ router.post('/database/:id', (req, res) => {
 
     db.query(q, [{ username: username, email: email, password: password, firstname: firstname, lastname: lastname, role: role }], function(err, results) {
       if (err) throw err;
-      res.redirect('/');
+      res.redirect('/database');
     });
 });
 

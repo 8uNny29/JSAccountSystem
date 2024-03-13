@@ -28,13 +28,10 @@ app.use(sessions({
     cookie: { maxAge: 1000 * 60 * 60 * 24 }
 }));
 
-app.use('/user-data/', express.static(__dirname + '/views'));
 
-//Routers
-app.use('/', dashBoard);
-app.use('/', tableData);
-app.use('/', tableEdit);
-app.use('/', quizApp);
+// Routers \\
+app.use('/database/', express.static(__dirname + '/views'));
+app.use('/', dashBoard, tableData, tableEdit);
 
 app.get('/', (req, res, next) => {
     if (req.session.loggedin) {
