@@ -10,11 +10,11 @@ const path = require('path')
 const dashBoard = require('./routers/dashBoard');
 const tableData = require('./routers/tableData');
 const tableEdit = require('./routers/tableEdit');
-const quizApp = require('./routers/quizFunction');
+const chatBot = require('./routers/chatBot');
 
 // Middleware
 const app = express();
-const port = 2902;
+const port = 2021;
 app.use(coookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -31,7 +31,7 @@ app.use(sessions({
 
 // Routers \\
 app.use('/database/', express.static(__dirname + '/views'));
-app.use('/', dashBoard, tableData, tableEdit);
+app.use('/', dashBoard, tableData, tableEdit, chatBot);
 
 app.get('/', (req, res, next) => {
     if (req.session.loggedin) {

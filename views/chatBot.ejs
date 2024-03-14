@@ -42,18 +42,17 @@
   
   <div class="body-text">
 
-      <div class="adminpanel">
-        <a href="/database" class="button-48" role="button"><span class="text">Database</span></a>
-        <a href="/chatbot" class="button-48" role="button"><span class="text">Chat Bot</span></a>
-        <a class="button-48" role="button"><span class="text">Button 48</span></a>
-        <a class="button-48" role="button"><span class="text">Button 48</span></a>
-        <a class="button-48" role="button"><span class="text">Button 48</span></a>
-        <a class="button-48" role="button"><span class="text">Button 48</span></a>
-        <a class="button-48" role="button"><span class="text">Button 48</span></a>
-        <a class="button-48" role="button"><span class="text">Button 48</span></a>
-        <a class="button-48" role="button"><span class="text">Button 48</span></a>
-        <a class="button-48" role="button"><span class="text">Button 48</span></a>
+    <div class="chat-container">
+      <div class="message-container">
+        <p class="message">
+          <%= message %>
+        </p>
       </div>
+      <form action="/chatbot" method="post">
+        <input type="text" name="message" placeholder="Type your message here...">
+        <button type="submit">Send</button>
+      </form>
+    </div>
 
   </div>
 
